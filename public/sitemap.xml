@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  sitemap.xml – kertoo Googlelle sivuston kaikki sivut ja niiden tärkeysjärjestyksen.
+  Laita tämä tiedosto Vitessa public/-kansioon → tulee osoitteeseen /sitemap.xml
+
+  MUISTA päivittää:
+  - <loc>-tagien domain vastaamaan oikeaa osoitetta
+  - <lastmod>-päivämäärä aina kun teet isoja muutoksia
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Etusivu / Galleria -->
+  <url>
+    <loc>https://www.hakalahti.com/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <!-- priority 1.0 = tärkein sivu -->
+    <priority>1.0</priority>
+    <!-- hreflang kertoo Googlelle että sivu on suomeksi -->
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.hakalahti.com/"/>
+  </url>
+
+  <!-- Tilaustyöt -->
+  <url>
+    <loc>https://www.hakalahti.com/tilaustyot</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.hakalahti.com/tilaustyot"/>
+  </url>
+
+  <!-- Yhteydenotot -->
+  <url>
+    <loc>https://www.hakalahti.com/yhteydenotot</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.hakalahti.com/yhteydenotot"/>
+  </url>
+
+</urlset>

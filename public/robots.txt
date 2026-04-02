@@ -1,0 +1,13 @@
+# robots.txt – kertoo hakukoneroboteille mitä ne saavat indeksoida.
+# Laita tämä public/-kansioon → tulee osoitteeseen /robots.txt
+#
+# Kun olet deployannnut Verceliin/Netlifyyn, ilmoita sitemap Google Search
+# Consolessa: https://search.google.com/search-console
+
+# Salli kaikki hakukoneet indeksoimaan koko sivusto
+User-agent: *
+Allow: /
+
+# Kerro Googlelle missä sitemap sijaitsee
+# MUISTA vaihtaa domain oikeaksi!
+Sitemap: https://www.taulut.fi/sitemap.xml
