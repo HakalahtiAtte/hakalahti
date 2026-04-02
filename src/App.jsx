@@ -174,6 +174,38 @@ const GLOBAL_CSS = `
   ::-webkit-scrollbar-track { background: var(--black); }
   ::-webkit-scrollbar-thumb { background: var(--mid); border-radius: 3px; }
 
+  /* Hamburger — hidden on desktop, shown on mobile */
+  .hamburger {
+    display: none;
+    background: none; border: none; cursor: pointer;
+    padding: 0.5rem; flex-direction: column; justify-content: center;
+  }
+  .nav-desktop { display: flex; gap: 0.25rem; align-items: center; }
+  .nav-mobile-menu {
+    position: absolute; top: 64px; right: 0;
+    background: rgba(13,13,11,0.97);
+    border: 1px solid var(--border);
+    min-width: 200px;
+    z-index: 200;
+    backdrop-filter: blur(12px);
+  }
+
+  @media (max-width: 600px) {
+    .hamburger { display: flex; }
+    .nav-desktop { display: none; }
+  }
+
+  /* About section — stack on mobile */
+  @media (max-width: 600px) {
+    .about-section { flex-direction: column; align-items: center; text-align: center; gap: 1.5rem !important; }
+    .about-img { width: 140px !important; height: 140px !important; }
+  }
+
+  /* CustomPage grid — stack on mobile */
+  @media (max-width: 640px) {
+    .custom-grid { grid-template-columns: 1fr !important; }
+  }
+
   /* Before/After drag slider */
   .ba-slider {
     position: relative;
@@ -264,51 +296,51 @@ function useSEO({ title, description, keywords, canonical }) {
 // DATA
 // ─────────────────────────────────────────────
 const PAINTINGS = [
-  { id: "taulu5",  src: "images/taulu5_result.webp",  title: "Lapinpöllö",              size: "41×30cm",  medium: "Öljymaalaus" },
-  { id: "taulu6",  src: "images/taulu6_result.webp",  title: "Maakotka",                size: "42×40cm",  medium: "Öljymaalaus" },
-  { id: "taulu7",  src: "images/taulu7_result.webp",  title: "Ilves",                   size: "40×68cm",  medium: "Öljymaalaus" },
-  { id: "taulu8",  src: "images/taulu8_result.webp",  title: "Koivut",                  size: "45×85cm",  medium: "Öljymaalaus" },
-  { id: "taulu9",  src: "images/taulu9_result.webp",  title: "Pitkospuut lintutornille",size: "90×120cm", medium: "Öljymaalaus" },
-  { id: "taulu10", src: "images/taulu10_result.webp", title: "Talitiainen",             size: "22×22cm",  medium: "Öljymaalaus" },
-  { id: "taulu11", src: "images/taulu11_result.webp", title: "Punatulkku",              size: "22×22cm",  medium: "Öljymaalaus" },
-  { id: "taulu12", src: "images/taulu12_result.webp", title: "Töyhtötiainen",           size: "22×22cm",  medium: "Öljymaalaus" },
-  { id: "taulu13", src: "images/taulu13_result.webp", title: "Tilhi",                   size: "22×22cm",  medium: "Öljymaalaus" },
-  { id: "taulu14", src: "images/taulu14_result.webp", title: "Villihevonen",            size: "68×60cm",  medium: "Öljymaalaus" },
-  { id: "taulu15", src: "images/taulu15_result.webp", title: "Karhu",                   size: "40×30cm",  medium: "Öljymaalaus" },
-  { id: "taulu16", src: "images/taulu16_result.webp", title: "Hömötiainen",             size: "25×19cm",  medium: "Öljymaalaus" },
-  { id: "taulu17", src: "images/taulu17_result.webp", title: "Hömötiaiset",             size: "30×30cm",  medium: "Öljymaalaus" },
-  { id: "taulu18", src: "images/taulu18_result.webp", title: "Katse",                   size: "100×45cm", medium: "Öljymaalaus" },
-  { id: "taulu20", src: "images/taulu20_result.webp", title: "Kotka",                   size: "90×50cm",  medium: "Öljymaalaus" },
-  { id: "taulu21", src: "images/taulu21_result.webp", title: "Teeret",                  size: "40×30cm",  medium: "Öljymaalaus" },
-  { id: "taulu22", src: "images/taulu22_result.webp", title: "Oja",                     size: "70×50cm",  medium: "Öljymaalaus" },
-  { id: "taulu23", src: "images/taulu23_result.webp", title: "Mandariini ja Morsio",    size: "65×30cm",  medium: "Öljymaalaus" },
-  { id: "taulu24", src: "images/taulu24_result.webp", title: "Ilta",                    size: "45×30cm",  medium: "Öljymaalaus" },
-  { id: "taulu25", src: "images/taulu25_result.webp", title: "Joutsen",                 size: "85×60cm",  medium: "Öljymaalaus" },
-  { id: "taulu26", src: "images/taulu26_result.webp", title: "Nuolihaukka",             size: "42×30cm",  medium: "Öljymaalaus" },
-  { id: "taulu27", src: "images/taulu27_result.webp", title: "Metso",                   size: "68×60cm",  medium: "Öljymaalaus" },
-  { id: "taulu28", src: "images/taulu28_result.webp", title: "Susi",                    size: "45×60cm",  medium: "Öljymaalaus" },
-  { id: "taulu29", src: "images/taulu29_result.webp", title: "Lapinpöllö",              size: "45×85cm",  medium: "Öljymaalaus" },
-  { id: "taulu33", src: "images/taulu33_result.webp", title: "Suojaväritys",            size: "25×100cm", medium: "Öljymaalaus" },
-  { id: "taulu34", src: "images/taulu34_result.webp", title: "Pala Mäntyä",             size: "30×65cm",  medium: "Öljymaalaus" },
-  { id: "taulu35", src: "images/taulu35_result.webp", title: "Pyytölamminoja",          size: "60×45cm",  medium: "Öljymaalaus" },
-  { id: "taulu36", src: "images/taulu36_result.webp", title: "Alkulähteillä",           size: "100×75cm", medium: "Öljymaalaus" },
-  { id: "taulu37", src: "images/taulu37_result.webp", title: "Joenmutka",               size: "80×60cm",  medium: "Öljymaalaus" },
-  { id: "taulu38", src: "images/taulu38_result.webp", title: "Suopursut kukkii",        size: "80×60cm",  medium: "Öljymaalaus" },
-  { id: "taulu39", src: "images/taulu39_result.webp", title: "Puro Kiekkikairassa",     size: "100×75cm", medium: "Öljymaalaus" },
-  { id: "taulu40", src: "images/taulu40_result.webp", title: "Järvisuo, Mourunki",      size: "80×60cm",  medium: "Öljymaalaus" },
-  { id: "taulu41", src: "images/taulu41_result.webp", title: "Koivikko",                size: "80×60cm",  medium: "Öljymaalaus" },
-  { id: "taulu42", src: "images/taulu42_result.webp", title: "Matkalainen",             size: "60×80cm",  medium: "Öljymaalaus" },
-  { id: "taulu43", src: "images/taulu43_result.webp", title: "Onko lahdella lintuja",   size: "75×100cm", medium: "Öljymaalaus" },
+  { id: "taulu5",  src: "images/taulu5.webp",  title: "Lapinpöllö",              size: "41×30cm",  medium: "Öljymaalaus" },
+  { id: "taulu6",  src: "images/taulu6.webp",  title: "Maakotka",                size: "42×40cm",  medium: "Öljymaalaus" },
+  { id: "taulu7",  src: "images/taulu7.webp",  title: "Ilves",                   size: "40×68cm",  medium: "Öljymaalaus" },
+  { id: "taulu8",  src: "images/taulu8.webp",  title: "Koivut",                  size: "45×85cm",  medium: "Öljymaalaus" },
+  { id: "taulu9",  src: "images/taulu9.webp",  title: "Pitkospuut lintutornille",size: "90×120cm", medium: "Öljymaalaus" },
+  { id: "taulu10", src: "images/taulu10.webp", title: "Talitiainen",             size: "22×22cm",  medium: "Öljymaalaus" },
+  { id: "taulu11", src: "images/taulu11.webp", title: "Punatulkku",              size: "22×22cm",  medium: "Öljymaalaus" },
+  { id: "taulu12", src: "images/taulu12.webp", title: "Töyhtötiainen",           size: "22×22cm",  medium: "Öljymaalaus" },
+  { id: "taulu13", src: "images/taulu13.webp", title: "Tilhi",                   size: "22×22cm",  medium: "Öljymaalaus" },
+  { id: "taulu14", src: "images/taulu14.webp", title: "Villihevonen",            size: "68×60cm",  medium: "Öljymaalaus" },
+  { id: "taulu15", src: "images/taulu15.webp", title: "Karhu",                   size: "40×30cm",  medium: "Öljymaalaus" },
+  { id: "taulu16", src: "images/taulu16.webp", title: "Hömötiainen",             size: "25×19cm",  medium: "Öljymaalaus" },
+  { id: "taulu17", src: "images/taulu17.webp", title: "Hömötiaiset",             size: "30×30cm",  medium: "Öljymaalaus" },
+  { id: "taulu18", src: "images/taulu18.webp", title: "Katse",                   size: "100×45cm", medium: "Öljymaalaus" },
+  { id: "taulu20", src: "images/taulu20.webp", title: "Kotka",                   size: "90×50cm",  medium: "Öljymaalaus" },
+  { id: "taulu21", src: "images/taulu21.webp", title: "Teeret",                  size: "40×30cm",  medium: "Öljymaalaus" },
+  { id: "taulu22", src: "images/taulu22.webp", title: "Oja",                     size: "70×50cm",  medium: "Öljymaalaus" },
+  { id: "taulu23", src: "images/taulu23.webp", title: "Mandariini ja Morsio",    size: "65×30cm",  medium: "Öljymaalaus" },
+  { id: "taulu24", src: "images/taulu24.webp", title: "Ilta",                    size: "45×30cm",  medium: "Öljymaalaus" },
+  { id: "taulu25", src: "images/taulu25.webp", title: "Joutsen",                 size: "85×60cm",  medium: "Öljymaalaus" },
+  { id: "taulu26", src: "images/taulu26.webp", title: "Nuolihaukka",             size: "42×30cm",  medium: "Öljymaalaus" },
+  { id: "taulu27", src: "images/taulu27.webp", title: "Metso",                   size: "68×60cm",  medium: "Öljymaalaus" },
+  { id: "taulu28", src: "images/taulu28.webp", title: "Susi",                    size: "45×60cm",  medium: "Öljymaalaus" },
+  { id: "taulu29", src: "images/taulu29.webp", title: "Lapinpöllö",              size: "45×85cm",  medium: "Öljymaalaus" },
+  { id: "taulu33", src: "images/taulu33.webp", title: "Suojaväritys",            size: "25×100cm", medium: "Öljymaalaus" },
+  { id: "taulu34", src: "images/taulu34.webp", title: "Pala Mäntyä",             size: "30×65cm",  medium: "Öljymaalaus" },
+  { id: "taulu35", src: "images/taulu35.webp", title: "Pyytölamminoja",          size: "60×45cm",  medium: "Öljymaalaus" },
+  { id: "taulu36", src: "images/taulu36.webp", title: "Alkulähteillä",           size: "100×75cm", medium: "Öljymaalaus" },
+  { id: "taulu37", src: "images/taulu37.webp", title: "Joenmutka",               size: "80×60cm",  medium: "Öljymaalaus" },
+  { id: "taulu38", src: "images/taulu38.webp", title: "Suopursut kukkii",        size: "80×60cm",  medium: "Öljymaalaus" },
+  { id: "taulu39", src: "images/taulu39.webp", title: "Puro Kiekkikairassa",     size: "100×75cm", medium: "Öljymaalaus" },
+  { id: "taulu40", src: "images/taulu40.webp", title: "Järvisuo, Mourunki",      size: "80×60cm",  medium: "Öljymaalaus" },
+  { id: "taulu41", src: "images/taulu41.webp", title: "Koivikko",                size: "80×60cm",  medium: "Öljymaalaus" },
+  { id: "taulu42", src: "images/taulu42.webp", title: "Matkalainen",             size: "60×80cm",  medium: "Öljymaalaus" },
+  { id: "taulu43", src: "images/taulu43.webp", title: "Onko lahdella lintuja",   size: "75×100cm", medium: "Öljymaalaus" },
 ];
 
 const SOLD = [
-  { id: "taulu1",  src: "images/taulu1_result.webp",  title: "Riekko" },
-  { id: "taulu2",  src: "images/taulu2_result.webp",  title: "Talvi" },
-  { id: "taulu3",  src: "images/taulu3_result.webp",  title: "Lapinpöllö" },
-  { id: "taulu30", src: "images/taulu30_result.webp", title: "Koivikko" },
-  { id: "taulu31", src: "images/taulu31_result.webp", title: "Koskikara" },
-  { id: "taulu32", src: "images/taulu32_result.webp", title: "Västäräkki" },
-  { id: "taulu19", src: "images/taulu19_result.webp", title: "Suopursumetsä" },
+  { id: "taulu1",  src: "images/taulu1.webp",  title: "Riekko" },
+  { id: "taulu2",  src: "images/taulu2.webp",  title: "Talvi" },
+  { id: "taulu3",  src: "images/taulu3.webp",  title: "Lapinpöllö" },
+  { id: "taulu30", src: "images/taulu30.webp", title: "Koivikko" },
+  { id: "taulu31", src: "images/taulu31.webp", title: "Koskikara" },
+  { id: "taulu32", src: "images/taulu32.webp", title: "Västäräkki" },
+  { id: "taulu19", src: "images/taulu19.webp", title: "Suopursumetsä" },
 ];
 
 // ─────────────────────────────────────────────
@@ -348,20 +380,49 @@ function ForestSVG() {
 // ─────────────────────────────────────────────
 
 function Nav({ page, setPage }) {
+  const [open, setOpen] = useState(false);
   const links = [
     { id: "home",    label: "Koti" },
     { id: "custom",  label: "Tilaustyöt" },
     { id: "contact", label: "Yhteydenotot" },
   ];
+  const handleNav = (id) => { setPage(id); setOpen(false); };
   return (
-    <nav aria-label="Päävalikko" style={{ display:"flex", gap:"0.25rem", alignItems:"center" }}>
-      {links.map((l) => (
-        <button key={l.id} className={`nav-btn${page===l.id?" active":""}`}
-          onClick={() => setPage(l.id)}
-          aria-current={page===l.id ? "page" : undefined}>
-          {l.label}
-        </button>
-      ))}
+    <nav aria-label="Päävalikko" style={{ position:"relative" }}>
+      {/* Hamburger button — visible only on mobile via CSS class */}
+      <button
+        className="hamburger"
+        onClick={() => setOpen(!open)}
+        aria-label={open ? "Sulje valikko" : "Avaa valikko"}
+        aria-expanded={open}
+      >
+        <span style={{ display:"block", width:22, height:2, background:"var(--cream)", marginBottom:5, transition:"all 0.2s", transform: open ? "rotate(45deg) translate(5px,5px)" : "none" }}/>
+        <span style={{ display:"block", width:22, height:2, background:"var(--cream)", marginBottom:5, transition:"all 0.2s", opacity: open ? 0 : 1 }}/>
+        <span style={{ display:"block", width:22, height:2, background:"var(--cream)", transition:"all 0.2s", transform: open ? "rotate(-45deg) translate(5px,-5px)" : "none" }}/>
+      </button>
+      {/* Desktop nav — always visible on wide screens */}
+      <div className="nav-desktop">
+        {links.map((l) => (
+          <button key={l.id} className={`nav-btn${page===l.id?" active":""}`}
+            onClick={() => handleNav(l.id)}
+            aria-current={page===l.id ? "page" : undefined}>
+            {l.label}
+          </button>
+        ))}
+      </div>
+      {/* Mobile dropdown */}
+      {open && (
+        <div className="nav-mobile-menu">
+          {links.map((l) => (
+            <button key={l.id} className={`nav-btn${page===l.id?" active":""}`}
+              onClick={() => handleNav(l.id)}
+              aria-current={page===l.id ? "page" : undefined}
+              style={{ display:"block", width:"100%", textAlign:"right", padding:"0.85rem 1.5rem" }}>
+              {l.label}
+            </button>
+          ))}
+        </div>
+      )}
     </nav>
   );
 }
@@ -435,8 +496,17 @@ function SectionTitle({ children }) {
 // ─────────────────────────────────────────────
 // CONTACT FORM
 // ─────────────────────────────────────────────
-
-const FORMSPREE_ID = "xdaplyop"; 
+// HOW TO HOOK THIS UP WITH FORMSPREE (free, no backend needed):
+//
+// 1. Go to https://formspree.io and create a free account
+// 2. Create a new form — you'll get a form ID like "xbjwnkpz"
+// 3. Replace "YOUR_FORM_ID" below with your actual ID:
+//    const FORMSPREE_ID = "xbjwnkpz";
+// 4. That's it! Formspree handles email delivery, spam filtering,
+//    and sends submissions straight to janne.hakalahti@gmail.com.
+//    Free plan allows 50 submissions/month which is plenty.
+//
+const FORMSPREE_ID = "YOUR_FORM_ID"; // ← replace this
 
 function ContactForm() {
   const [form, setForm]     = useState({ name:"", email:"", message:"" });
@@ -488,7 +558,7 @@ function ContactForm() {
             Sähköposti
           </label>
           <input className="form-input" type="email" name="email" value={form.email}
-            onChange={handleChange} placeholder="sinun@email.com" required/>
+            onChange={handleChange} placeholder="sinun@email.fi" required/>
         </div>
       </div>
       <div>
@@ -574,9 +644,9 @@ function HomePage({ setModal }) {
 
       {/* About — "Janne Hakalahti" kept here as it's the artist bio */}
       <section aria-labelledby="about-heading"
-        style={{ maxWidth:900, margin:"0 auto", padding:"5rem 2rem 6rem", display:"flex", gap:"4rem", flexWrap:"wrap", alignItems:"flex-start" }}>
-        <img src="images/janne_result.webp" alt="Janne Hakalahti, taidemaalari Oulu" loading="lazy"
-          style={{ width:180, height:180, objectFit:"cover", border:"1px solid var(--border)", flexShrink:0, filter:"grayscale(30%)" }}/>
+        className="about-section" style={{ maxWidth:900, margin:"0 auto", padding:"5rem 2rem 6rem", display:"flex", gap:"4rem", flexWrap:"wrap", alignItems:"flex-start" }}>
+        <img src="images/janne.webp" alt="Janne Hakalahti, taidemaalari Oulu" loading="lazy"
+          className="about-img" style={{ width:180, height:180, objectFit:"cover", border:"1px solid var(--border)", flexShrink:0, filter:"grayscale(30%)" }}/>
         <div style={{ flex:1, minWidth:240 }}>
           <p style={{ fontSize:"0.68rem", letterSpacing:"0.28em", textTransform:"uppercase", color:"var(--gold)", marginBottom:"0.8rem" }}>Taiteilijasta</p>
           <h2 id="about-heading"
@@ -681,7 +751,7 @@ function CustomPage({ setModal }) {
   return (
     <div className="page-enter" style={{ maxWidth:900, margin:"0 auto", padding:"5rem 2rem 6rem" }}>
       <SectionTitle>Tilaustyöt</SectionTitle>
-      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"3rem", alignItems:"start" }}>
+      <div className="custom-grid" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"3rem", alignItems:"start" }}>
         <div>
           <h1 style={{ fontFamily:"var(--font-display)", fontSize:"1.6rem", fontWeight:300, color:"var(--cream)", marginBottom:"1.5rem", letterSpacing:"0.04em" }}>
             Öljymaalaus tilauksesta
@@ -695,8 +765,8 @@ function CustomPage({ setModal }) {
           ))}
         </div>
         <BeforeAfterSlider
-          before="images/before11_result.webp"
-          after="images/after22_result.webp"
+          before="images/before11.webp"
+          after="images/after22.webp"
           beforeAlt="Referenssikuva tilausmaalauksen pohjalle"
           afterAlt="Valmis käsinmaalattu öljymaalaus tilaustyönä"
           aspectRatio="3/4"
