@@ -589,7 +589,7 @@ function HomePage({ setModal }) {
   useSEO({
     title: "Hakalahti – Öljymaalaukset | Osta alkuperäistaulu Kempeleestä",
     description: "Osta alkuperäinen käsinmaalattu öljymaalaus Kempeleestä. Hakalahden uniikkeja tauluja olohuoneeseen — lintuaiheita, maisemia ja luontoa. Tilaustyöt myös.",
-    keywords: "maalaus, taulu, öljymaalaus, taulu kempele, taulu oulu, alkuperäismaalaus, käsinmaalattu taulu, uniikki maalaus, taulu olohuoneeseen, suomalainen taide, osta maalaus, lintumaalaus, luontomaalaus, hakalahti, seinätaide kotiin",
+    keywords: "öljymaalaus, taulu kempele, alkuperäismaalaus, käsinmaalattu taulu, uniikki maalaus, taulu olohuoneeseen, suomalainen taide, osta maalaus, lintumaalaus, luontomaalaus, hakalahti, seinätaide kotiin",
     canonical: "/",
   });
 
@@ -741,36 +741,31 @@ function BeforeAfterSlider({ before, after, beforeAlt, afterAlt, aspectRatio = "
   );
 }
 
-function CustomPage({ setModal }) {
+function CustomPage() {
   useSEO({
     title: "Tilaustyöt – Hakalahti | Öljymaalaus tilauksesta, Kempele",
     description: "Tilaa oma öljymaalaus Hakalahdelta Kempeleestä. Käsinmaalattu taulu valokuvan pohjalta — linnut, maisemat, lemmikit.",
-    keywords: "tilausmaalaus, maalaus tilauksesta, öljymaalaus tilauksesta, lemmikkimuotokuva, lintumaalaus tilaus, käsinmaalattu lahja, taulu tilauksesta Kempele, taulu tilauksesta oulu",
+    keywords: "tilausmaalaus, öljymaalaus tilauksesta, lemmikkimuotokuva, lintumaalaus tilaus, käsinmaalattu lahja, taulu tilauksesta kempele, taulu tilauksesta oulu",
     canonical: "/tilaustyot",
   });
   return (
-    <div className="page-enter" style={{ maxWidth:900, margin:"0 auto", padding:"5rem 2rem 6rem" }}>
+    <div className="page-enter" style={{ maxWidth:680, margin:"0 auto", padding:"5rem 2rem 6rem" }}>
       <SectionTitle>Tilaustyöt</SectionTitle>
-      <div className="custom-grid" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"3rem", alignItems:"start" }}>
-        <div>
-          <h1 style={{ fontFamily:"var(--font-display)", fontSize:"1.6rem", fontWeight:300, color:"var(--cream)", marginBottom:"1.5rem", letterSpacing:"0.04em" }}>
-            Öljymaalaus tilauksesta
-          </h1>
-          {[
-            "Maalaan myös tilauksesta uniikki öljymaalaus sinulle tai lahjaksi.",
-            "Käsinmaalattu taulu voidaan tehdä valokuvan pohjalta — esimerkiksi linnuista, maisemista tai lemmikeistä. Jokainen tilaustyö on alkuperäinen, uniikki maalaus.",
-            "Käytän töissäni laadukkaita öljyvärejä ja kankaita.",
-          ].map((t, i) => (
-            <p key={i} style={{ color:"var(--body)", lineHeight:1.85, marginBottom:"1rem" }}>{t}</p>
-          ))}
-        </div>
-        <BeforeAfterSlider
-          before="images/before11_result.webp"
-          after="images/after22_result.webp"
-          beforeAlt="Referenssikuva tilausmaalauksen pohjalle"
-          afterAlt="Valmis käsinmaalattu öljymaalaus tilaustyönä"
-          aspectRatio="3/4"
-        />
+      <h1 style={{ fontFamily:"var(--font-display)", fontSize:"1.6rem", fontWeight:300, color:"var(--cream)", marginBottom:"1.5rem", letterSpacing:"0.04em" }}>
+        Öljymaalaus tilauksesta
+      </h1>
+      {[
+        "Maalaan myös tilauksesta uniikki öljymaalaus sinulle tai lahjaksi.",
+        "Käsinmaalattu taulu voidaan tehdä valokuvan pohjalta — esimerkiksi linnuista, maisemista tai lemmikeistä. Jokainen tilaustyö on alkuperäinen, uniikki maalaus.",
+        "Käytän töissäni laadukkaita öljyvärejä ja kankaita.",
+      ].map((t, i) => (
+        <p key={i} style={{ color:"var(--body)", lineHeight:1.85, marginBottom:"1rem" }}>{t}</p>
+      ))}
+      <div style={{ marginTop:"2.5rem", padding:"1.5rem 2rem", border:"1px solid var(--border)", background:"var(--dark)" }}>
+        <p style={{ fontSize:"0.68rem", letterSpacing:"0.2em", textTransform:"uppercase", color:"var(--gold)", marginBottom:"0.75rem" }}>Kiinnostuitko?</p>
+        <p style={{ color:"var(--body)", lineHeight:1.85, marginBottom:"1rem" }}>
+          Ota yhteyttä ja kerro toiveistasi — sovitaan yksityiskohdat yhdessä.
+        </p>
       </div>
     </div>
   );
@@ -780,7 +775,7 @@ function ContactPage() {
   useSEO({
     title: "Yhteydenotot – Hakalahti | Taulut Kempele",
     description: "Ota yhteyttä. Kysy tilausmaalauksia, taulujen hintoja tai lisätietoja.",
-    keywords: "ota yhteyttä, hakalahti yhteystiedot, taulut oulu, taulut kempele",
+    keywords: "ota yhteyttä, hakalahti yhteystiedot, taulut kempele",
     canonical: "/yhteydenotot",
   });
   return (
@@ -808,8 +803,15 @@ export default function App() {
   const [page, setPage]   = useState("home");
   const [modal, setModal] = useState(null);
 
+  // Allow CustomPage CTA to navigate to contact
+  useEffect(() => {
+    const handler = (e) => setPage(e.detail);
+    window.addEventListener("navigate", handler);
+    return () => window.removeEventListener("navigate", handler);
+  }, []);
+
   const renderPage = () => {
-    if (page === "custom")  return <CustomPage setModal={setModal}/>;
+    if (page === "custom")  return <CustomPage/>;
     if (page === "contact") return <ContactPage/>;
     return <HomePage setModal={setModal}/>;
   };
