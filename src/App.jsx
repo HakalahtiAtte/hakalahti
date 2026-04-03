@@ -587,9 +587,9 @@ function ContactForm() {
 
 function HomePage({ setModal }) {
   useSEO({
-    title: "Hakalahti – Öljymaalaukset | Osta alkuperäistaulu Oulusta",
-    description: "Osta alkuperäinen käsinmaalattu öljymaalaus Oulusta. Hakalahden uniikkeja tauluja olohuoneeseen — lintuaiheita, maisemia ja luontoa. Tilaustyöt myös.",
-    keywords: "öljymaalaus, taulu oulu, alkuperäismaalaus, käsinmaalattu taulu, uniikki maalaus, taulu olohuoneeseen, suomalainen taide, osta maalaus, lintumaalaus, luontomaalaus, hakalahti, seinätaide kotiin",
+    title: "Hakalahti – Öljymaalaukset | Osta alkuperäistaulu Kempeleestä",
+    description: "Osta alkuperäinen käsinmaalattu öljymaalaus Kempeleestä. Hakalahden uniikkeja tauluja olohuoneeseen — lintuaiheita, maisemia ja luontoa. Tilaustyöt myös.",
+    keywords: "maalaus, taulu, öljymaalaus, taulu kempele, taulu oulu, alkuperäismaalaus, käsinmaalattu taulu, uniikki maalaus, taulu olohuoneeseen, suomalainen taide, osta maalaus, lintumaalaus, luontomaalaus, hakalahti, seinätaide kotiin",
     canonical: "/",
   });
 
@@ -598,9 +598,9 @@ function HomePage({ setModal }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context":"https://schema.org", "@type":"Person",
         name:"Janne Hakalahti", jobTitle:"Taidemaalari",
-        description:"Suomalainen taidemaalari Oulusta. Käsinmaalattuja öljymaalauksia: lintuaiheita, maisemia ja luontoa.",
+        description:"Suomalainen taidemaalari Kempeleestä. Käsinmaalattuja öljymaalauksia: lintuaiheita, maisemia ja luontoa.",
         email:"janne.hakalahti@gmail.com", url:SITE_URL,
-        address:{ "@type":"PostalAddress", addressLocality:"Oulu", addressCountry:"FI" },
+        address:{ "@type":"PostalAddress", addressLocality:"Kempele", addressCountry:"FI" },
       })}}/>
 
       {/* Hero */}
@@ -609,7 +609,7 @@ function HomePage({ setModal }) {
         <ForestSVG/>
         <div style={{ textAlign:"center", padding:"2rem" }}>
           <p style={{ fontSize:"0.68rem", letterSpacing:"0.35em", textTransform:"uppercase", color:"var(--gold)", marginBottom:"1.2rem" }}>
-            Öljymaalaukset · Oulu
+            Öljymaalaukset · Kempele
           </p>
           <h1 id="hero-title"
             style={{ fontFamily:"var(--font-display)", fontSize:"clamp(2.8rem,7vw,5rem)", fontWeight:300, letterSpacing:"0.08em", color:"var(--cream)", lineHeight:1 }}>
@@ -645,13 +645,13 @@ function HomePage({ setModal }) {
       {/* About — "Janne Hakalahti" kept here as it's the artist bio */}
       <section aria-labelledby="about-heading"
         className="about-section" style={{ maxWidth:900, margin:"0 auto", padding:"5rem 2rem 6rem", display:"flex", gap:"4rem", flexWrap:"wrap", alignItems:"flex-start" }}>
-        <img src="images/janne_result.webp" alt="Janne Hakalahti, taidemaalari Oulu" loading="lazy"
+        <img src="images/janne_result.webp" alt="Janne Hakalahti, taidemaalari Kempele" loading="lazy"
           className="about-img" style={{ width:180, height:180, objectFit:"cover", border:"1px solid var(--border)", flexShrink:0, filter:"grayscale(30%)" }}/>
         <div style={{ flex:1, minWidth:240 }}>
           <p style={{ fontSize:"0.68rem", letterSpacing:"0.28em", textTransform:"uppercase", color:"var(--gold)", marginBottom:"0.8rem" }}>Taiteilijasta</p>
           <h2 id="about-heading"
             style={{ fontFamily:"var(--font-display)", fontSize:"2rem", fontWeight:300, color:"var(--cream)", marginBottom:"1.5rem", letterSpacing:"0.04em" }}>
-            Janne Hakalahti — taidemaalari, Oulu
+            Janne Hakalahti — taidemaalari, Kempele
           </h2>
           {[
             "Jannen taulut ovat pääasiassa luontoaiheisia käsinmaalattuja öljymaalauksia. Lintuaiheita lienee enemmistö töistä — maisemat ja muutkin aihepiirit pääsevät toisinaan siveltimen alle.",
@@ -743,9 +743,9 @@ function BeforeAfterSlider({ before, after, beforeAlt, afterAlt, aspectRatio = "
 
 function CustomPage({ setModal }) {
   useSEO({
-    title: "Tilaustyöt – Hakalahti | Öljymaalaus tilauksesta, Oulu",
-    description: "Tilaa oma öljymaalaus Hakalahdelta Oulusta. Käsinmaalattu taulu valokuvan pohjalta — linnut, maisemat, lemmikit.",
-    keywords: "tilausmaalaus, öljymaalaus tilauksesta, lemmikkimuotokuva, lintumaalaus tilaus, käsinmaalattu lahja, taulu tilauksesta oulu",
+    title: "Tilaustyöt – Hakalahti | Öljymaalaus tilauksesta, Kempele",
+    description: "Tilaa oma öljymaalaus Hakalahdelta Kempeleestä. Käsinmaalattu taulu valokuvan pohjalta — linnut, maisemat, lemmikit.",
+    keywords: "tilausmaalaus, maalaus tilauksesta, öljymaalaus tilauksesta, lemmikkimuotokuva, lintumaalaus tilaus, käsinmaalattu lahja, taulu tilauksesta Kempele, taulu tilauksesta oulu",
     canonical: "/tilaustyot",
   });
   return (
@@ -778,9 +778,9 @@ function CustomPage({ setModal }) {
 
 function ContactPage() {
   useSEO({
-    title: "Yhteydenotot – Hakalahti | Taulut Oulu",
+    title: "Yhteydenotot – Hakalahti | Taulut Kempele",
     description: "Ota yhteyttä. Kysy tilausmaalauksia, taulujen hintoja tai lisätietoja.",
-    keywords: "ota yhteyttä, hakalahti yhteystiedot, taulut oulu",
+    keywords: "ota yhteyttä, hakalahti yhteystiedot, taulut oulu, taulut kempele",
     canonical: "/yhteydenotot",
   });
   return (
@@ -843,7 +843,7 @@ export default function App() {
 
       <footer style={{ borderTop:"1px solid var(--border)", padding:"2.5rem 2rem", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:"1rem" }}>
         <p style={{ fontSize:"0.72rem", letterSpacing:"0.15em", color:"var(--muted)", textTransform:"uppercase" }}>
-          © Hakalahti — Öljymaalaukset, Oulu
+          © Hakalahti — Öljymaalaukset, Kempele
         </p>
         <p style={{ fontSize:"0.72rem", letterSpacing:"0.12em", color:"var(--mid)", textTransform:"uppercase" }}>
           hakalahti.com
