@@ -11,7 +11,7 @@ const GLOBAL_CSS = `
     --mid:     #2a2a26;
     --border:  rgba(255,255,255,0.12);
     --cream:   #f0ece1;
-    --body:    #c8c4b8;
+    --body:    #d4d0c4;
     --muted:   #9a9488;
     --gold:    #b49b5a;
     --gold-lt: rgba(180,155,90,0.15);
@@ -804,7 +804,7 @@ export default function App() {
         <p style={{ fontSize:"0.72rem", letterSpacing:"0.15em", color:"var(--muted)", textTransform:"uppercase" }}>
           © Hakalahti — Öljymaalaukset, Kempele
         </p>
-        <p style={{ fontSize:"0.72rem", letterSpacing:"0.12em", color:"var(--mid)", textTransform:"uppercase" }}>
+        <p style={{ fontSize:"0.72rem", letterSpacing:"0.12em", color:"var(--muted)", textTransform:"uppercase" }}>
           hakalahti.com
         </p>
       </footer>
