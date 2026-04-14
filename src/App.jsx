@@ -323,6 +323,7 @@ const PAINTINGS = [
   { id: "taulu41", src: "images/taulu41.webp", title: "Koivikko",                size: "80×60cm",  medium: "Öljymaalaus" },
   { id: "taulu42", src: "images/taulu42.webp", title: "Matkalainen",             size: "60×80cm",  medium: "Öljymaalaus" },
   { id: "taulu43", src: "images/taulu43.webp", title: "Onko lahdella lintuja",   size: "75×100cm", medium: "Öljymaalaus" },
+  { id: "taulu44", src: "images/taulu44.webp", title: "Korpireitti",             size: "64×80cm",  medium: "Öljymaalaus" },
 ];
 
 const SOLD = [
