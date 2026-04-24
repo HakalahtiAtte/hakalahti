@@ -324,6 +324,7 @@ const PAINTINGS = [
   { id: "taulu42", src: "images/taulu42.webp", title: "Matkalainen",             size: "60×80cm",  medium: "Öljymaalaus" },
   { id: "taulu43", src: "images/taulu43.webp", title: "Onko lahdella lintuja",   size: "75×100cm", medium: "Öljymaalaus" },
   { id: "taulu44", src: "images/taulu44.webp", title: "Korpireitti",             size: "64×80cm",  medium: "Öljymaalaus" },
+  { id: "taulu45", src: "images/taulu45.webp", title: "Köykkyrin luontopolun pitkospuut lumen peitossa",size: "60×80cm",  medium: "Öljymaalaus" },
 ];
 
 const SOLD = [
