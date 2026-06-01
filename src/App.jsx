@@ -244,6 +244,40 @@ const GLOBAL_CSS = `
     color: var(--gold);
     pointer-events: none;
   }
+
+  /* Atelier curtain reveal */
+  .curtain {
+    position: absolute; top: 0; bottom: 0;
+    width: 50%; z-index: 10; pointer-events: none;
+  }
+  .curtain-left {
+    left: 0;
+    background:
+      linear-gradient(to right, rgba(0,0,0,0.4) 0%, transparent 50%),
+      repeating-linear-gradient(180deg, transparent 0px, transparent 14px, rgba(0,0,0,0.07) 14px, rgba(0,0,0,0.07) 15px),
+      linear-gradient(170deg, #3a1212 0%, #1e0808 25%, #2d1010 50%, #1e0808 75%, #3a1212 100%);
+    border-right: 2px solid rgba(180,155,90,0.55);
+    box-shadow: inset -16px 0 32px rgba(0,0,0,0.55);
+    animation: curtainLeft 0.95s cubic-bezier(0.4,0,0.6,1) forwards;
+  }
+  .curtain-right {
+    right: 0;
+    background:
+      linear-gradient(to left, rgba(0,0,0,0.4) 0%, transparent 50%),
+      repeating-linear-gradient(180deg, transparent 0px, transparent 14px, rgba(0,0,0,0.07) 14px, rgba(0,0,0,0.07) 15px),
+      linear-gradient(190deg, #3a1212 0%, #1e0808 25%, #2d1010 50%, #1e0808 75%, #3a1212 100%);
+    border-left: 2px solid rgba(180,155,90,0.55);
+    box-shadow: inset 16px 0 32px rgba(0,0,0,0.55);
+    animation: curtainRight 0.95s cubic-bezier(0.4,0,0.6,1) forwards;
+  }
+  @keyframes curtainLeft {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-100%); }
+  }
+  @keyframes curtainRight {
+    from { transform: translateX(0); }
+    to   { transform: translateX(100%); }
+  }
 `;
 
 function GlobalStyles() {
@@ -325,6 +359,11 @@ const PAINTINGS = [
   { id: "taulu43", src: "images/taulu43.webp", title: "Onko lahdella lintuja",   size: "75×100cm", medium: "Öljymaalaus" },
   { id: "taulu44", src: "images/taulu44.webp", title: "Korpireitti",             size: "64×80cm",  medium: "Öljymaalaus" },
   { id: "taulu45", src: "images/taulu45.webp", title: "Köykkyrin luontopolun pitkospuut lumen peitossa",size: "60×80cm",  medium: "Öljymaalaus" },
+  { id: "taulu46", src: "images/taulu46.webp", title: "Tundrahanhet",                                  size: "80×60cm",  medium: "Öljymaalaus" },
+];
+
+const NUDE_PAINTINGS = [
+  { id: "akti1", src: "images/akti1.webp" },
 ];
 
 const SOLD = [
@@ -368,14 +407,29 @@ function ForestSVG() {
 
 function Nav({ page, setPage }) {
   const [open, setOpen] = useState(false);
+  const navRef = useRef(null);
   const links = [
     { id: "home",    label: "Koti" },
     { id: "custom",  label: "Tilaustyöt" },
     { id: "contact", label: "Yhteydenotot" },
   ];
   const handleNav = (id) => { setPage(id); setOpen(false); };
+
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    document.addEventListener("touchstart", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+      document.removeEventListener("touchstart", handler);
+    };
+  }, [open]);
+
   return (
-    <nav aria-label="Päävalikko" style={{ position:"relative" }}>
+    <nav ref={navRef} aria-label="Päävalikko" style={{ position:"relative" }}>
       {/* Hamburger button — visible only on mobile via CSS class */}
       <button
         className="hamburger"
@@ -432,7 +486,7 @@ function Modal({ painting, onClose }) {
         <img className="modal-img" src={painting.src}
           alt={`${painting.title}${painting.size ? ` – öljymaalaus ${painting.size}` : ""}`}
           style={{ maxWidth:"85vw", maxHeight:"78vh", objectFit:"contain", display:"block" }}
-          loading="lazy"/>
+          loading="eager"/>
         <div style={{ padding:"1rem 0.25rem 0", borderTop:"1px solid var(--border)", marginTop:"0.75rem" }}>
           <p style={{ fontFamily:"var(--font-display)", fontSize:"1.3rem", fontWeight:400, color:"var(--cream)", letterSpacing:"0.04em" }}>{painting.title}</p>
           {painting.size && <p style={{ fontSize:"0.82rem", color:"var(--muted)", letterSpacing:"0.1em", marginTop:"0.25rem" }}>{painting.size} · {painting.medium}</p>}
@@ -445,24 +499,24 @@ function Modal({ painting, onClose }) {
 function GalleryCard({ painting, onClick, priority = false }) {
   return (
     <article className="gallery-card" onClick={() => onClick(painting)}
-      tabIndex={0} onKeyDown={(e) => { if (e.key==="Enter") onClick(painting); }}
-      aria-label={`Avaa ${painting.title}`}
+      tabIndex={0} onKeyDown={(e) => { if (e.key==="Enter" || e.key===" ") onClick(painting); }}
+      aria-label={painting.title ? `Avaa ${painting.title}` : "Avaa maalaus"}
       style={{ borderRadius:0, overflow:"hidden" }}>
       <div style={{ position:"relative", aspectRatio:"4/3", overflow:"hidden", background:"var(--mid)" }}>
         <img src={painting.src}
-          alt={`${painting.title}${painting.size ? ` – ${painting.size} öljymaalaus` : " – öljymaalaus"}`}
+          alt={`${painting.title ? painting.title : "Maalaus"}${painting.size ? ` – ${painting.size} öljymaalaus` : " – öljymaalaus"}`}
           style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }}
           loading={priority ? "eager" : "lazy"}
           fetchPriority={priority ? "high" : "auto"}/>
         {painting.sold && <span className="sold-badge">Myyty</span>}
       </div>
-      <div style={{ padding:"0.9rem 1rem 1.1rem", borderTop:"1px solid var(--border)" }}>
-        <h3 style={{ fontFamily:"var(--font-display)", fontSize:"1.1rem", fontWeight:400, color:"var(--cream)", letterSpacing:"0.04em", marginBottom:"0.3rem" }}>
-          {painting.title}
-        </h3>
-        {painting.size   && <p style={{ fontSize:"0.78rem", color:"var(--body)", letterSpacing:"0.08em", textTransform:"uppercase" }}>{painting.size}</p>}
-        {painting.medium && <p style={{ fontSize:"0.78rem", color:"var(--gold)", letterSpacing:"0.08em", textTransform:"uppercase", marginTop:"0.15rem" }}>{painting.medium}</p>}
-      </div>
+      {(painting.title || painting.size || painting.medium) && (
+        <div style={{ padding:"0.9rem 1rem 1.1rem", borderTop:"1px solid var(--border)" }}>
+          {painting.title  && <h3 style={{ fontFamily:"var(--font-display)", fontSize:"1.1rem", fontWeight:400, color:"var(--cream)", letterSpacing:"0.04em", marginBottom:"0.3rem" }}>{painting.title}</h3>}
+          {painting.size   && <p style={{ fontSize:"0.78rem", color:"var(--body)", letterSpacing:"0.08em", textTransform:"uppercase" }}>{painting.size}</p>}
+          {painting.medium && <p style={{ fontSize:"0.78rem", color:"var(--gold)", letterSpacing:"0.08em", textTransform:"uppercase", marginTop:"0.15rem" }}>{painting.medium}</p>}
+        </div>
+      )}
     </article>
   );
 }
@@ -542,7 +596,7 @@ function ContactForm() {
         </label>
         <textarea className="form-input" name="message" value={form.message}
           onChange={handleChange} placeholder="Kerro mitä sinulla on mielessä — taulun osto, tilaustyö tai muu kysymys..."
-          rows={5} required/>
+          rows={5} maxLength={2000} required/>
       </div>
       {status === "error" && (
         <p style={{ color:"#e08080", fontSize:"0.88rem" }}>Jotain meni pieleen. Kokeile uudelleen tai lähetä sähköpostia suoraan.</p>
@@ -612,6 +666,9 @@ function HomePage({ setModal }) {
       </section>
 
       <hr className="gold-rule" style={{ maxWidth:1280, margin:"0 auto" }}/>
+      <NudeSection setModal={setModal}/>
+
+      <hr className="gold-rule" style={{ maxWidth:1280, margin:"0 auto" }}/>
 
       {/* About — "Janne Hakalahti" kept here as it's the artist bio */}
       <section aria-labelledby="about-heading"
@@ -633,6 +690,7 @@ function HomePage({ setModal }) {
           ))}
         </div>
       </section>
+
     </div>
   );
 }
@@ -704,7 +762,56 @@ function BeforeAfterSlider({ before, after, beforeAlt, afterAlt, aspectRatio = "
   );
 }
 
-function CustomPage() {
+function GatePanel({ onOpen }) {
+  return (
+    <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"4.5rem 2rem", border:"1px solid var(--border)", background:"var(--dark)", textAlign:"center", gap:"1.25rem" }}>
+      <div style={{ display:"flex", alignItems:"center", gap:"1rem", width:"100%", maxWidth:260 }}>
+        <div style={{ flex:1, height:1, background:"var(--gold)", opacity:0.35 }}/>
+        <span style={{ color:"var(--gold)", fontSize:"0.85rem", opacity:0.65 }}>✦</span>
+        <div style={{ flex:1, height:1, background:"var(--gold)", opacity:0.35 }}/>
+      </div>
+      <p style={{ color:"var(--muted)", maxWidth:380, lineHeight:1.9, fontSize:"0.88rem", letterSpacing:"0.02em" }}>
+        Tämä osio sisältää taiteellista alastomuutta esittäviä maalauksia.
+      </p>
+      <button className="form-btn" onClick={onOpen} style={{ marginTop:"0.25rem" }}>
+        Avaa osio
+      </button>
+    </div>
+  );
+}
+
+function NudeSection({ setModal }) {
+  const [state, setState] = useState("closed"); // "closed" | "revealing" | "open"
+
+  const handleOpen = () => {
+    setState("revealing");
+    setTimeout(() => setState("open"), 1050);
+  };
+
+  return (
+    <section aria-labelledby="nude-heading" style={{ maxWidth:1280, margin:"0 auto", padding:"4rem 2rem" }}>
+      <SectionTitle><span id="nude-heading">Ihmishahmo taiteessa</span></SectionTitle>
+
+      {state === "closed" ? (
+        <GatePanel onOpen={handleOpen}/>
+      ) : (
+        <div style={{ position:"relative", overflow:"hidden" }}>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(240px, 1fr))", gap:"1rem", animation:"pageEnter 0.5s ease 0.85s both" }}>
+            {NUDE_PAINTINGS.map((p) => <GalleryCard key={p.id} painting={p} onClick={setModal}/>)}
+          </div>
+          {state === "revealing" && (
+            <>
+              <div className="curtain curtain-left"/>
+              <div className="curtain curtain-right"/>
+            </>
+          )}
+        </div>
+      )}
+    </section>
+  );
+}
+
+function CustomPage({ setPage }) {
   useSEO({
     title: "Tilaustyöt – Hakalahti | Öljymaalaus tilauksesta, Kempele",
     description: "Tilaa oma öljymaalaus Hakalahdelta Kempeleestä. Käsinmaalattu taulu valokuvan pohjalta — linnut, maisemat, lemmikit.",
@@ -726,9 +833,10 @@ function CustomPage() {
       ))}
       <div style={{ marginTop:"2.5rem", padding:"1.5rem 2rem", border:"1px solid var(--border)", background:"var(--dark)" }}>
         <p style={{ fontSize:"0.68rem", letterSpacing:"0.2em", textTransform:"uppercase", color:"var(--gold)", marginBottom:"0.75rem" }}>Kiinnostuitko?</p>
-        <p style={{ color:"var(--body)", lineHeight:1.85, marginBottom:"1rem" }}>
+        <p style={{ color:"var(--body)", lineHeight:1.85, marginBottom:"1.25rem" }}>
           Ota yhteyttä ja kerro toiveistasi — sovitaan yksityiskohdat yhdessä.
         </p>
+        <button className="form-btn" onClick={() => setPage("contact")}>Ota yhteyttä</button>
       </div>
     </div>
   );
@@ -763,14 +871,8 @@ export default function App() {
   const [page, setPage]   = useState("home");
   const [modal, setModal] = useState(null);
 
-  useEffect(() => {
-    const handler = (e) => setPage(e.detail);
-    window.addEventListener("navigate", handler);
-    return () => window.removeEventListener("navigate", handler);
-  }, []);
-
   const renderPage = () => {
-    if (page === "custom")  return <CustomPage/>;
+    if (page === "custom")  return <CustomPage setPage={setPage}/>;
     if (page === "contact") return <ContactPage/>;
     return <HomePage setModal={setModal}/>;
   };
