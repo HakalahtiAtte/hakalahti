@@ -46,7 +46,8 @@ for src in sorted(SOURCE_DIR.iterdir()):
         skipped += 1
         continue
 
-    img = Image.open(src).convert("RGB")
+    with Image.open(src) as raw:
+        img = raw.convert("RGB")
     original_size = src.stat().st_size
     img = resize(img)
     img.save(dest, "WEBP", quality=QUALITY, method=6)
@@ -54,6 +55,7 @@ for src in sorted(SOURCE_DIR.iterdir()):
 
     # Remove the original if it was a non-WebP source
     if src.suffix.lower() != ".webp":
+        src.chmod(0o666)
         src.unlink()
 
     saving = (1 - new_size / original_size) * 100
