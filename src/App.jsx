@@ -364,6 +364,7 @@ const PAINTINGS = [
 
 const NUDE_PAINTINGS = [
   { id: "akti1", src: "images/akti1.webp" },
+  { id: "akti2", src: "images/akti2.webp" },
 ];
 
 const SOLD = [
