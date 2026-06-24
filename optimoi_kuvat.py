@@ -59,7 +59,7 @@ for src in sorted(SOURCE_DIR.iterdir()):
         src.unlink()
 
     saving = (1 - new_size / original_size) * 100
-    print(f"  {src.name:40s}  {original_size//1024:>5} KB  →  {new_size//1024:>5} KB  ({saving:.0f}% pienempi)")
+    print(f"  {src.name:40s}  {original_size//1024:>5} KB  ->  {new_size//1024:>5} KB  ({saving:.0f}% pienempi)")
     processed += 1
 
 print(f"\nValmis. Käsitelty {processed} kuvaa, ohitettu {skipped}.")
